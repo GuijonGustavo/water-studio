@@ -3,12 +3,12 @@ library(corrplot)
 library(reshape2)
 library(ggplot2)
 
-SDGsCities <- read.csv("SDGsCities.csv")
-write.csv(SDGsCities,file="SDGsCities.csv")
+SDGsCities <- read.csv("/home/wattie/water-studio/data/metztitlan_2_mim.csv")
+write.csv(SDGsCities,file="tlacotepec_mim.csv")
 
 ####  Calculating Mutual information ###
 
-MISDGsCities <- cmi(SDGsCities)
+MISDGsCities <- cmi(SDGsCities,na.rm = TRUE)
 
 ###
 
