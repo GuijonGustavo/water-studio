@@ -1,0 +1,172 @@
+---
+title: "Ranking de variables usando Teoría de la Información."
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Dra. Melanie Kolb
+
+M. en F. C. Gustavo Magallanes-Guijón
+
+Dr. Oliver López-Corona
+
+```{r eval=TRUE, message=FALSE, echo=FALSE}
+# Librerías
+library(RColorBrewer) 
+library(funModeling)
+library(corrplot)
+library(mpmi)
+
+```
+
+
+# Sitio: Tlacotepec
+
+Acontinuación se presentan cuatro apartados de gráficos del cuerpo de agua Río Metztitlán, sitio Tlacotepec.
+
+Los gráficos son en el siguiente orden:
+
+* **Información mutua**
+
+* **Entropía**
+
+* **Ganancia de información**
+
+* **Proporción de Ganancia (de información)**
+
+```{r eval=TRUE, message=FALSE, echo=FALSE}
+tlacotepec_mim <- read.csv("tlacotepec_mim.csv")
+
+tlacotepec_mim[is.na(tlacotepec_mim)] <- 0
+
+maxVal <- max(tlacotepec_mim)
+
+tlacotepec_normal <- tlacotepec_mim/maxVal
+```
+## Gráficas Información Mutua
+
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+#**en**: Entropía medida en bits
+
+#**mi**: Información mutual (mutual information)
+
+#**ig**: Ganancia de información (information gain)
+
+#**gr**: Proporción de ganancia (gain ratio)
+
+
+eti_tlacotepec = c(
+  'SAAM', 
+  'OD_mg/L', 
+  'COLI_TOT', 
+  'pH_CAMPO', 
+  'TEMP_AGUA', 
+  'NI_TOT',
+  'E_COLI', 
+  'HG_TOT', 
+  'CR_TOT', 
+  'AS_TOT', 
+  'TURBIEDAD', 
+  'SST', 
+  'COLOR_VER',
+  'DUR_TOT', 
+  'N_TOT', 
+  'COLI_FEC', 
+  'N_NH3', 
+  'N_NO2', 
+  'N_NO3')
+
+
+names_eti_tlacotepec = c(
+  'Sustancias Activas al Azul de Metileno',
+ 'Oxígeno Disuelto',
+ 'Coliformes Totales',
+ 'Potencial de Hidrógeno',
+ 'Temperatura agua',
+ 'Níquel Total',
+ 'Escherichia coli',
+ 'Mercurio Total',
+ 'Cromo Total',
+ 'Arsénico Total',
+ 'Turbiedad',
+ 'Sólidos Suspendidos Totales',
+ 'Color Verdadero',
+ 'Dureza Total',
+ 'Nitrógeno Total (Cálculo)',
+ 'Coliformes Fecales',
+ 'Nitrógeno Amoniacal',
+ 'Nitrógeno de Nitritos',
+ 'Nitrógeno de Nitratos')
+```
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+for (i in seq_along(eti_tlacotepec)) {
+  try(
+    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[i]), aes(x = reorder(var, mi),y = mi, fill = var))
+          + geom_bar(stat = "identity") 
+          + coord_flip() 
+          + theme_bw() 
+          + xlab("") 
+          + ggtitle(names_eti_tlacotepec[i])
+          + theme(plot.title = element_text(hjust = 0.5))
+          + guides(fill = FALSE)))
+  
+  try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[i])))
+}
+
+```
+## Gráficas Entropía
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+for (j in seq_along(eti_tlacotepec)) {
+  try(
+    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[j]), aes(x = reorder(var, en),y = en, fill = var))
+          + geom_bar(stat = "identity") 
+          + coord_flip() 
+          + theme_bw() 
+          + xlab("") 
+          + ggtitle(names_eti_tlacotepec[j])
+          + theme(plot.title = element_text(hjust = 0.5))
+          + guides(fill = FALSE)))
+  
+  try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[j])))
+}
+
+```
+
+## Gráficas Ganancia de información
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+for (k in seq_along(eti_tlacotepec)) {
+  try(
+    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[k]), aes(x = reorder(var, ig),y = ig, fill = var))
+          + geom_bar(stat = "identity") 
+          + coord_flip() 
+          + theme_bw() 
+          + xlab("") 
+          + ggtitle(names_eti_tlacotepec[k])
+          + theme(plot.title = element_text(hjust = 0.5))
+          + guides(fill = FALSE)))
+  
+  try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[k])))
+}
+
+```
+
+## Gráficas Proporción de Ganancia (de información)
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+for (l in seq_along(eti_tlacotepec)) {
+  try(
+    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[l]), aes(x = reorder(var, gr),y = gr, fill = var))
+          + geom_bar(stat = "identity") 
+          + coord_flip() 
+          + theme_bw() 
+          + xlab("") 
+          + ggtitle(names_eti_tlacotepec[l])
+          + theme(plot.title = element_text(hjust = 0.5))
+          + guides(fill = FALSE)))
+  
+  try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[l])))
+}
+
+```

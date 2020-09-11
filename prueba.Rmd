@@ -1,0 +1,130 @@
+---
+title: "Información Mutua: Río Metztitlán"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Dra. Melanie Kolb
+
+M. en F. C. Gustavo Magallanes-Guijón
+
+Dr. Oliver López-Corona
+
+### Librerías
+
+```{r eval=TRUE, message=FALSE}
+library(RColorBrewer) 
+library(funModeling)
+library(corrplot)
+library(mpmi)
+
+```
+
+
+### Data Tlacotepec
+
+```{r eval=TRUE, message=FALSE}
+SDGsCities <- read.csv("tlacotepec_mim.csv")
+#write.csv(SDGsCities,file="tlacotepec_mim.csv")
+
+#SDGsCitiesNA=na.omit(SDGsCities)
+
+#mine_res_hd=mine(SDGsCitiesNA)
+
+
+#mic_predictive=mine(mine_res_hd, master = index_target)$MIC
+
+
+
+####  Calculating Mutual information ###
+
+MISDGsCities <- cmi(SDGsCities,na.rm = TRUE)
+
+###
+
+MISDGsCitiesValues <- MISDGsCities$bcmi
+#write.csv(MISDGsCitiesValues, file = "MISDGsCitiesValues.csv")
+
+#plot rectangule
+#mp(MISDGsCitiesValues)
+
+maxVal <- max(MISDGsCitiesValues)
+
+NormMISDGsCitiesValues <- MISDGsCitiesValues/maxVal
+#write.csv(NormMISDGsCitiesValues, file = "NormMISDGsCitiesValues.csv")
+
+#plot_num(SDGsCities)
+corrplot(NormMISDGsCitiesValues, type = "lower", order = "hclust", tl.col = "black", tl.srt = 0)
+
+corrplot(NormMISDGsCitiesValues, method="number", type = "lower", is.corr = T, order = "hclust", tl.col = "black", tl.srt = 0, tl.cex = 0.9, number.cex=0.5)
+
+
+#cross_plot(NormMISDGsCitiesValues, input = "COLI_FEC", target = "N_NO3", plot_type = "percentual")
+
+
+####
+
+#MISDGsCitiesZscore <- MISDGsCities$zvalues
+#write.csv(MISDGsCitiesZscore, file = "MISDGsCitiesZscores.csv")
+
+
+#mp(MISDGsCitiesZscore)
+
+###################
+#library(funModeling)
+
+SDGsCitiesFun <- read.csv("tlacotepec_mim.csv")
+
+
+#SDGsCitiesFun[is.na(SDGsCitiesFun)] <- 0
+#length(SDGsCitiesFun)
+#df_status(SDGsCitiesFun)
+#di=data_integrity(SDGsCitiesFun)
+#di
+#summary(di)
+# histogramas de variables numéricas
+#plot_num(SDGsCitiesFun)
+```
+```{r eval=TRUE, warning=FALSE}
+#correlation_table(SDGsCitiesFun, "has_SDGsCitiesFun")
+#variable_importance =  var_rank_info(SDGsCities, "SAAM")
+
+
+
+#describe(heart_disease$has_heart_disease)
+#SDGsCitiesFun$COLI_TOT
+#variable_importance
+#ggplot(variable_importance, aes(x = reorder(var, mi), y = mi, fill = var)) + geom_bar(stat = "identity") + coord_flip() + theme_bw() + xlab("") + ylab("Variable Importance (based on Mutual Information)") +   guides(fill = FALSE)
+
+```
+
+# Gráficas de ranking 
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE}
+etiquetas = c('SAAM','OD_mg/L','COLI_TOT','pH_CAMPO','TEMP_AGUA','NI_TOT','E_COLI','HG_TOT','PB_TOT','CD_TOT','CR_TOT','AS_TOT','TURBIEDAD','SST','COLOR_VER','DUR_TOT','N_TOT','COLI_FEC','PO4_TOT','N_NH3','N_NO2','N_NO3')
+
+
+#ggplot(var_rank_info(SDGsCities,  x[i]), aes(x = reorder(var, gr),y = gr, fill = var)) + geom_bar(stat = "identity") + coord_flip() + theme_bw() +     xlab("") + ylab("Variable Importance (based on Information Gain)"  ) + guides(fill = FALSE)
+#par(mfrow = c(22, 1))
+for (i in seq_along(etiquetas)) {
+  #z[i] <- gsub(" ", "", paste('var_',x[i]))
+  #try(variable_importance = var_rank_info(SDGsCities,  x[i]))
+ # x[i]
+  #try(print(x[i]))
+  #loadError=F
+  try(
+    print(plot <- ggplot(var_rank_info(SDGsCities,  etiquetas[i]), aes(x = reorder(var, mi),y = mi, fill = var)) +ggtitle(etiquetas[i])+ geom_bar(stat = "identity") + coord_flip() + theme_gray() +     xlab("") + ylab("Variable Importance (based on Information Gain)"  ) + guides(fill = FALSE)))
+  #if (plot){
+  #try(print(plot))
+  try(print(var_rank_info(SDGsCities,  etiquetas[i])))
+  
+  #}
+  
+  #print(z)
+  #print(var_rank_info(SDGsCities, x[i]))
+  #print(plot))
+}
+
+```
