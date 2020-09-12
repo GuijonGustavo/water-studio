@@ -48,7 +48,7 @@ Los gráficos son en el siguiente orden:
 # Matríz de Información Mutua
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
-tlacotepec_mim <- read.csv("tlacotepec_mim.csv")
+tlacotepec_mim <- read.csv("data/tlacotepec_mim.csv")
 
 tlacotepec_mim[is.na(tlacotepec_mim)] <- 0
 
