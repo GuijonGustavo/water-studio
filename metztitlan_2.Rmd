@@ -44,6 +44,8 @@ Los gráficos son en el siguiente orden:
   + **Ganancia de información**
 
   + **Proporción de Ganancia (de información)**
+  
+  Todos los cálculos fueron hechos en el entorno y lenguaje de programación R con la biblioteca [FunModeling](https://cran.r-project.org/web/packages/funModeling/funModeling.pdf)
 
 # Matríz de Información Mutua
 
