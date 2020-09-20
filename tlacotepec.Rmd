@@ -24,13 +24,13 @@ library(minerva)
 ```
 
 
-# Sitio: Metztitlán 1
+# Sitio: Tlacotepec
 
 Se tiene un marco de datos que contiene varias métricas relacionadas, y se calculó (con la teoría de la información): entropía, información mutua, ganancia de información y relación de ganancia.
 
 Para esto se contó con los datos multivariados (marco de datos de entrada), y todas las variables se evaluaron contra una variable definida (como parámetro "objetivo").
 
-Acontinuación se presentan cuatro apartados de gráficos del cuerpo de agua Río Metztitlán, sitio Metztitlán 1.
+Acontinuación se presentan cuatro apartados de gráficos del cuerpo de agua Río Metztitlán, sitio sitio.
 
 Los gráficos son en el siguiente orden:
 
@@ -50,7 +50,7 @@ Los gráficos son en el siguiente orden:
 # Matríz de Información Mutua
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
-sitio_mim <- read.csv("data/metztitlan_1_mim.csv")
+sitio_mim <- read.csv("data/tlacotepec_mim.csv")
 
 sitio_mim[is.na(sitio_mim)] <- 0
 
@@ -123,13 +123,38 @@ corrplot(res_mine$MIC,
 
 
 eti_sitio = c(
-  'E_COLI', 'HG_TOT', 'TURBIEDAD', 'SST', 'COLOR_VER', 'DUR_TOT', 'N_TOT',
-       'COLI_FEC', 'N_NH3', 'N_NO2', 'N_NO3')
+  'SAAM', 
+  'OD_mg/L', 
+  'COLI_TOT', 
+  'pH_CAMPO', 
+  'TEMP_AGUA', 
+  'NI_TOT',
+  'E_COLI', 
+  'HG_TOT', 
+  'CR_TOT', 
+  'AS_TOT', 
+  'TURBIEDAD', 
+  'SST', 
+  'COLOR_VER',
+  'DUR_TOT', 
+  'N_TOT', 
+  'COLI_FEC', 
+  'N_NH3', 
+  'N_NO2', 
+  'N_NO3')
 
 
 names_eti_sitio = c(
-  'Escherichia coli',
+  'Sustancias Activas al Azul de Metileno',
+ 'Oxígeno Disuelto',
+ 'Coliformes Totales',
+ 'Potencial de Hidrógeno',
+ 'Temperatura agua',
+ 'Níquel Total',
+ 'Escherichia coli',
  'Mercurio Total',
+ 'Cromo Total',
+ 'Arsénico Total',
  'Turbiedad',
  'Sólidos Suspendidos Totales',
  'Color Verdadero',

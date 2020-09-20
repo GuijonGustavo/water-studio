@@ -50,17 +50,17 @@ Los gráficos son en el siguiente orden:
 # Matríz de Información Mutua
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
-tlacotepec_mim <- read.csv("data/metztitlan_2_mim.csv")
+sitio_mim <- read.csv("data/metztitlan_2_mim.csv")
 
-tlacotepec_mim[is.na(tlacotepec_mim)] <- 0
+sitio_mim[is.na(sitio_mim)] <- 0
 
-maxVal <- max(tlacotepec_mim)
+maxVal <- max(sitio_mim)
 
-tlacotepec_normal <- tlacotepec_mim/maxVal
+sitio_normal <- sitio_mim/maxVal
 
 
 #calculo de MIC
-res_mine=mine(tlacotepec_mim)
+res_mine=mine(sitio_mim)
 
 ```
 
@@ -122,7 +122,7 @@ corrplot(res_mine$MIC,
 #**gr**: Proporción de ganancia (gain ratio)
 
 
-eti_tlacotepec = c(
+eti_sitio = c(
   'HG_TOT', 
   'TURBIEDAD', 
   'SST', 
@@ -135,7 +135,7 @@ eti_tlacotepec = c(
   'N_NO3')
 
 
-names_eti_tlacotepec = c(
+names_eti_sitio = c(
   'Mercurio Total',
  'Turbiedad',
  'Sólidos Suspendidos Totales',
@@ -149,19 +149,19 @@ names_eti_tlacotepec = c(
 ```
 ## Gráficas Información Mutua
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE, results='hide'}
-for (i in seq_along(eti_tlacotepec)) {
+for (i in seq_along(eti_sitio)) {
   try(
-    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[i]), aes(x = reorder(var, mi),y = mi, fill = var))
+    print(plot <- ggplot(var_rank_info(sitio_normal,  eti_sitio[i]), aes(x = reorder(var, mi),y = mi, fill = var))
           + geom_bar(stat = "identity") 
           + coord_flip() 
           + theme_bw() 
           + xlab("")
           + ylab("Información Mutua")
-          + ggtitle(names_eti_tlacotepec[i])
+          + ggtitle(names_eti_sitio[i])
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE)))
   
-    #try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[i])))
+    #try(print(var_rank_info(sitio_normal, eti_sitio[i])))
 }
 
 ```
@@ -169,57 +169,57 @@ for (i in seq_along(eti_tlacotepec)) {
 ## Gráficas Entropía
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE, results='hide'}
-for (j in seq_along(eti_tlacotepec)) {
+for (j in seq_along(eti_sitio)) {
   try(
-    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[j]), aes(x = reorder(var, en),y = en, fill = var))
+    print(plot <- ggplot(var_rank_info(sitio_normal,  eti_sitio[j]), aes(x = reorder(var, en),y = en, fill = var))
           + geom_bar(stat = "identity") 
           + coord_flip() 
           + theme_bw() 
           + xlab("") 
           + ylab("Entropía")
-          + ggtitle(names_eti_tlacotepec[j])
+          + ggtitle(names_eti_sitio[j])
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE)))
   
-  #try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[j])))
+  #try(print(var_rank_info(sitio_normal, eti_sitio[j])))
 }
 
 ```
 
 ## Gráficas Ganancia de información
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE, results='hide'}
-for (k in seq_along(eti_tlacotepec)) {
+for (k in seq_along(eti_sitio)) {
   try(
-    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[k]), aes(x = reorder(var, ig),y = ig, fill = var))
+    print(plot <- ggplot(var_rank_info(sitio_normal,  eti_sitio[k]), aes(x = reorder(var, ig),y = ig, fill = var))
           + geom_bar(stat = "identity") 
           + coord_flip() 
           + theme_bw() 
           + xlab("") 
           + ylab("Ganancia de la Información")
-          + ggtitle(names_eti_tlacotepec[k])
+          + ggtitle(names_eti_sitio[k])
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE)))
   
-  #try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[k])))
+  #try(print(var_rank_info(sitio_normal, eti_sitio[k])))
 }
 
 ```
 
 ## Gráficas Proporción de Ganancia (de información)
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE, results='hide'}
-for (l in seq_along(eti_tlacotepec)) {
+for (l in seq_along(eti_sitio)) {
   try(
-    print(plot <- ggplot(var_rank_info(tlacotepec_normal,  eti_tlacotepec[l]), aes(x = reorder(var, gr),y = gr, fill = var))
+    print(plot <- ggplot(var_rank_info(sitio_normal,  eti_sitio[l]), aes(x = reorder(var, gr),y = gr, fill = var))
           + geom_bar(stat = "identity") 
           + coord_flip() 
           + theme_bw() 
           + xlab("") 
           + ylab("Proporción de Ganancia (de información)")
-          + ggtitle(names_eti_tlacotepec[l])
+          + ggtitle(names_eti_sitio[l])
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE)))
   
-  #try(print(var_rank_info(tlacotepec_normal, eti_tlacotepec[l])))
+  #try(print(var_rank_info(sitio_normal, eti_sitio[l])))
 }
 
 ```
