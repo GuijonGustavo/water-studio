@@ -1,0 +1,107 @@
+---
+title: "Ranking de variables usando Teoría de la Información."
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+
+library(funModeling)
+```
+
+
+
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+sitio_mim <- read.csv("data/tlacotepec_mim.csv")
+
+sitio_mim[is.na(sitio_mim)] <- 0
+
+maxVal <- max(sitio_mim)
+
+sitio_normal <- sitio_mim/maxVal
+
+```
+
+
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
+
+
+eti_sitio = c(
+  'SAAM', 
+  'OD_mg.L', 
+  'COLI_TOT', 
+  'pH_CAMPO', 
+  'TEMP_AGUA', 
+  'NI_TOT',
+  'E_COLI', 
+  'HG_TOT', 
+  'CR_TOT', 
+  'AS_TOT', 
+  'TURBIEDAD', 
+  'SST', 
+  'COLOR_VER',
+  'DUR_TOT', 
+  'N_TOT', 
+  'COLI_FEC', 
+  'N_NH3', 
+  'N_NO2', 
+  'N_NO3')
+
+
+names_eti_sitio = c(
+  'Sustancias Activas al Azul de Metileno',
+ 'Oxígeno Disuelto',
+ 'Coliformes Totales',
+ 'Potencial de Hidrógeno',
+ 'Temperatura agua',
+ 'Níquel Total',
+ 'Escherichia coli',
+ 'Mercurio Total',
+ 'Cromo Total',
+ 'Arsénico Total',
+ 'Turbiedad',
+ 'Sólidos Suspendidos Totales',
+ 'Color Verdadero',
+ 'Dureza Total',
+ 'Nitrógeno Total (Cálculo)',
+ 'Coliformes Fecales',
+ 'Nitrógeno Amoniacal',
+ 'Nitrógeno de Nitritos',
+ 'Nitrógeno de Nitratos')
+```
+## Gráficas Información Mutua
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='show'}
+for (i in seq_along(eti_sitio)) {
+  
+    print(plot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[i]), aes(x = reorder(var, mi),y = mi, fill = var))
+          + geom_bar(stat = "identity") 
+          + coord_flip() 
+          + theme_bw() 
+          + xlab("") 
+          + ylab("Información Mutua")
+          + ggtitle(names_eti_sitio[i])
+          + theme(plot.title = element_text(hjust = 0.5))
+          + guides(fill = FALSE))
+  
+  #print
+  print(var_rank_info(sitio_mim, eti_sitio[i]))
+  
+  #save table in csv
+  name_table <- names_eti_sitio[i]
+  new_name_table <- paste("csv-graphs/tlaco/mi/",name_table,"_mi.csv",sep = "")
+  write.table(var_rank_info(sitio_mim, eti_sitio[i]), file = new_name_table, sep = ",", col.names = NA)
+  
+  #Five best variables
+  variable_importance = var_rank_info(sitio_mim, eti_sitio[i])
+  var_i <- variable_importance$var
+  mi_i <- variable_importance$mi
+  
+  dataframe_i <- data.frame(var_i,mi_i)
+  
+  print(head(dataframe_i[order(-mi_i),],5))
+}
+
+```

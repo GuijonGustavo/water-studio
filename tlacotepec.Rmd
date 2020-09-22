@@ -124,7 +124,7 @@ corrplot(res_mine$MIC,
 
 eti_sitio = c(
   'SAAM', 
-  'OD_mg/L', 
+  'OD_mg.L', 
   'COLI_TOT', 
   'pH_CAMPO', 
   'TEMP_AGUA', 
