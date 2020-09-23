@@ -19,9 +19,9 @@ sitio_mim <- read.csv("data/tlacotepec_mim.csv")
 
 sitio_mim[is.na(sitio_mim)] <- 0
 
-maxVal <- max(sitio_mim)
+#maxVal <- max(sitio_mim)
 
-sitio_normal <- sitio_mim/maxVal
+#sitio_normal <- sitio_mim/maxVal
 
 ```
 
@@ -74,9 +74,23 @@ names_eti_sitio = c(
 ```
 ## Gráficas Información Mutua
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='show'}
+
+
 for (i in seq_along(eti_sitio)) {
+
+#Five best variables
+  variable_importance = var_rank_info(sitio_mim, eti_sitio[i])
+  var_i <- variable_importance$var
+  mi_i <- variable_importance$mi
   
-    print(plot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[i]), aes(x = reorder(var, mi),y = mi, fill = var))
+  dataframe_i <- data.frame(var_i,mi_i)
+  
+  five_rank <- head(dataframe_i[order(-mi_i),],5)
+
+  print(five_rank)
+
+  
+    print(plot <- ggplot(five_rank, aes(x = reorder(var_i, mi_i),y = mi_i, fill = var_i))
           + geom_bar(stat = "identity") 
           + coord_flip() 
           + theme_bw() 
@@ -87,21 +101,16 @@ for (i in seq_along(eti_sitio)) {
           + guides(fill = FALSE))
   
   #print
-  print(var_rank_info(sitio_mim, eti_sitio[i]))
+  #print(var_rank_info(sitio_mim, eti_sitio[i]))
   
   #save table in csv
-  name_table <- names_eti_sitio[i]
-  new_name_table <- paste("csv-graphs/tlaco/mi/",name_table,"_mi.csv",sep = "")
-  write.table(var_rank_info(sitio_mim, eti_sitio[i]), file = new_name_table, sep = ",", col.names = NA)
+  #name_table <- names_eti_sitio[i]
+  #new_name_table <- paste("csv-graphs/tlaco/mi/",name_table,"_mi.csv",sep = "")
+ # write.table(var_rank_info(sitio_mim, eti_sitio[i]), file = new_name_table, sep = ",", col.names = NA)
   
-  #Five best variables
-  variable_importance = var_rank_info(sitio_mim, eti_sitio[i])
-  var_i <- variable_importance$var
-  mi_i <- variable_importance$mi
   
-  dataframe_i <- data.frame(var_i,mi_i)
   
-  print(head(dataframe_i[order(-mi_i),],5))
+  
 }
 
 ```
