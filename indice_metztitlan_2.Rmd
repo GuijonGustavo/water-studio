@@ -1,5 +1,5 @@
 ---
-title: "Índice Tlacotepec"
+title: "Índice Metztitlán 2"
 output: html_document
 ---
 
@@ -17,45 +17,26 @@ library(DT)
 ```
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
-sitio_mim <- read.csv("data/tlacotepec_mim.csv")
+sitio_mim <- read.csv("data/metztitlan_2_mim.csv")
 
 ```
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 
 eti_sitio = c(
-  'SAAM', 
-  'OD_mg.L', 
-  'COLI_TOT', 
-  'pH_CAMPO', 
-  'TEMP_AGUA', 
-  'NI_TOT',
-  'E_COLI', 
   'HG_TOT', 
-  'CR_TOT', 
-  'AS_TOT', 
   'TURBIEDAD', 
   'SST', 
-  'COLOR_VER',
+  'COLOR_VER', 
   'DUR_TOT', 
-  'N_TOT', 
+  'N_TOT',
   'COLI_FEC', 
   'N_NH3', 
   'N_NO2', 
   'N_NO3')
 
-
 names_eti_sitio = c(
-  'Sustancias Activas al Azul de Metileno',
- 'Oxígeno Disuelto',
- 'Coliformes Totales',
- 'Potencial de Hidrógeno',
- 'Temperatura agua',
- 'Níquel Total',
- 'Escherichia coli',
- 'Mercurio Total',
- 'Cromo Total',
- 'Arsénico Total',
+  'Mercurio Total',
  'Turbiedad',
  'Sólidos Suspendidos Totales',
  'Color Verdadero',
