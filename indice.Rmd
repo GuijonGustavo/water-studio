@@ -3,13 +3,16 @@ title: "Ranking de variables usando Teoría de la Información."
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=TRUE}
+#knitr::opts_chunk$set(echo = TRUE)
+#DT::datatable()
 ```
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
-
+library(knitr)
 library(funModeling)
+
+
 ```
 
 
@@ -73,32 +76,58 @@ names_eti_sitio = c(
  'Nitrógeno de Nitratos')
 ```
 ## Gráficas Información Mutua
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='show'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='asis'}
+
+
+library(DT)
+library(rmarkdown)
+knitr::opts_chunk$set(echo = TRUE)
+
 
 
 for (i in seq_along(eti_sitio)) {
 
 #Five best variables
   variable_importance = var_rank_info(sitio_mim, eti_sitio[i])
-  var_i <- variable_importance$var
-  mi_i <- variable_importance$mi
+  #var_i <- variable_importance$var
+  #mi_i <- variable_importance$mi
   
-  dataframe_i <- data.frame(var_i,mi_i)
+  #dataframe_i <- data.frame(var_i,mi_i)
   
-  five_rank <- head(dataframe_i[order(-mi_i),],5)
+  #five_rank <- head(dataframe_i[order(-mi_i),],5)
+  
+  dataframe_i <- data.frame(variable_importance)
+  
+  five_rank <- head(dataframe_i[order(-dataframe_i$mi),],5)
+  
+  
+  
+  
+  
+  
+  #print(names_eti_sitio[i])
+  
+  #datatable(five_rank)
 
-  print(five_rank)
-
+  #kable()
+  #paged_table(five_rank, options = list(rows.print = 15))
   
-    print(plot <- ggplot(five_rank, aes(x = reorder(var_i, mi_i),y = mi_i, fill = var_i))
-          + geom_bar(stat = "identity") 
-          + coord_flip() 
-          + theme_bw() 
-          + xlab("") 
-          + ylab("Información Mutua")
-          + ggtitle(names_eti_sitio[i])
-          + theme(plot.title = element_text(hjust = 0.5))
-          + guides(fill = FALSE))
+  #datatable(five_rank, rownames = FALSE, filter="top", options = list(pageLength = 5, scrollX=T))
+  cat(paste("\n\n#### test: ", i , "##\n"))
+  print(htmltools::tagList(datatable(five_rank)))
+  
+  #datatable(five_rank)
+  #htmltools::tagList(datatable(five_rank))
+  
+#    print(plot <- ggplot(five_rank, aes(x = reorder(five_rank$var, five_rank$mi),y = five_rank$mi, fill = five_rank$var))
+#          + geom_bar(stat = "identity") 
+#          + coord_flip() 
+#          + theme_bw() 
+#          + xlab("") 
+#          + ylab("Información Mutua")
+#          + ggtitle(names_eti_sitio[i])
+#          + theme(plot.title = element_text(hjust = 0.5))
+#          + guides(fill = FALSE))
   
   #print
   #print(var_rank_info(sitio_mim, eti_sitio[i]))
@@ -108,9 +137,12 @@ for (i in seq_along(eti_sitio)) {
   #new_name_table <- paste("csv-graphs/tlaco/mi/",name_table,"_mi.csv",sep = "")
  # write.table(var_rank_info(sitio_mim, eti_sitio[i]), file = new_name_table, sep = ",", col.names = NA)
   
-  
+
   
   
 }
+
+datatable(five_rank)
+
 
 ```

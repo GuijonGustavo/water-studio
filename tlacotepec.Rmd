@@ -19,7 +19,7 @@ library(RColorBrewer)
 library(funModeling)
 library(corrplot)
 library(minerva)
-
+library(infotheo)
 ```
 
 
@@ -49,13 +49,8 @@ Los gráficos son en el siguiente orden:
 # Matríz de Información Mutua
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
+#data
 sitio_mim <- read.csv("data/tlacotepec_mim.csv")
-
-sitio_mim[is.na(sitio_mim)] <- 0
-
-#calculo de MIC
-#res_mine=mine(sitio_mim)
-
 ```
 
 
@@ -66,34 +61,24 @@ sitio_mim[is.na(sitio_mim)] <- 0
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
 
 
-library(infotheo)
-
-#sitio_mim <- read.csv("data/tlacotepec_mim.csv")
 # Discretizar cada variable
 matriz=discretize(sitio_mim) 
-
 # Calcular la "correlación" basándonos en información mutua
 matriz_im=mutinformation(matriz, method= "emp")
-
 # Truco para visualizar el valor máximo de la escala
 # excluyendo la diagonal (variable con respecto a sí misma)
 diag(matriz_im)=0
-
 # Gráfico de correlación con color y correlación con información mutua del paquete Infotheo. 
 corrplot(matriz_im, method="color",type="lower", number.cex=0.6,addCoef.col = "black", tl.col="red", tl.srt=90, tl.cex = 0.9, diag=FALSE, is.corr = F)
-
-
 ```
 ```{r eval=FALSE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 # Biblioteca para graficar esta matriz
 library(corrplot) 
 # Para usar la paleta de color brewer.pal
 library(RColorBrewer) 
-
 # Truco para visualizar el valor máximo de la escala
 # excluyendo la diagonal (var. con respecto a sí misma)
 diag(res_mine$MIC)=0
-
 # Gráfico de correlación con círculos. 
 corrplot(res_mine$MIC, 
          method="circle",
@@ -112,10 +97,6 @@ corrplot(res_mine$MIC,
          is.corr = F 
         
 )
-
-
-
-
 ```
 ```{r eval=FALSE, warning=FALSE, message=FALSE, error=FALSE, echo=FALSE}
 # Gráfico de correlación con color y correlación MIC
@@ -133,7 +114,6 @@ corrplot(res_mine$MIC,
 )
 ```
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
-
 eti_sitio = c(
   'SAAM', 
   'OD_mg.L', 
@@ -154,8 +134,6 @@ eti_sitio = c(
   'N_NH3', 
   'N_NO2', 
   'N_NO3')
-
-
 names_eti_sitio = c(
   'Sustancias Activas al Azul de Metileno',
  'Oxígeno Disuelto',
@@ -178,7 +156,8 @@ names_eti_sitio = c(
  'Nitrógeno de Nitratos')
 ```
 ## Gráficas Información Mutua
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
+#, results='hide'
 for (i in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[i]), aes(x = reorder(var, mi),y = mi, fill = var))
@@ -191,7 +170,7 @@ for (i in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #print(var_rank_info(sitio_normal, eti_sitio[i]))
+  print(var_rank_info(sitio_mim, eti_sitio[i]))
   #save table in csv
   #name_mi <- names_eti_sitio[i]
   #name_table_mi <- paste("csv-graphs/tlaco/mi/",name_mi,"_mi.csv",sep = "")
@@ -201,12 +180,11 @@ for (i in seq_along(eti_sitio)) {
   #plot_mi <- paste("images/tlaco/mi/",name_mi,"_mi.png",sep = "")
   #ggsave(plot_mi)
 }
-
 ```
 
 ## Gráficas Entropía
 
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
 for (j in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[j]), aes(x = reorder(var, en),y = en, fill = var))
@@ -219,7 +197,7 @@ for (j in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #print(var_rank_info(sitio_normal, eti_sitio[j]))
+  print(var_rank_info(sitio_mim, eti_sitio[j]))
   #save table in csv
   #name_en <- names_eti_sitio[j]
   #name_table_en <- paste("csv-graphs/tlaco/en/",name_en,"_en.csv",sep = "")
@@ -229,11 +207,10 @@ for (j in seq_along(eti_sitio)) {
   #plot_en <- paste("images/tlaco/en/",name_en,"_en.png",sep = "")
   #ggsave(plot_en)
 }
-
 ```
 
 ## Gráficas Ganancia de información
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
 for (k in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[k]), aes(x = reorder(var, ig),y = ig, fill = var))
@@ -246,7 +223,7 @@ for (k in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #print(var_rank_info(sitio_normal, eti_sitio[k]))
+  print(var_rank_info(sitio_mim, eti_sitio[k]))
   #save table in csv
   #name_ig <- names_eti_sitio[k]
   #name_table_ig <- paste("csv-graphs/tlaco/ig/",name_ig,"_ig.csv",sep = "")
@@ -256,11 +233,10 @@ for (k in seq_along(eti_sitio)) {
   #plot_ig <- paste("images/tlaco/ig/",name_ig,"_ig.png",sep = "")
   #ggsave(plot_ig)
 }
-
 ```
 
 ## Gráficas Proporción de Ganancia (de información)
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
 for (l in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[l]), aes(x = reorder(var, gr),y = gr, fill = var))
@@ -273,7 +249,7 @@ for (l in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #print(var_rank_info(sitio_normal, eti_sitio[l]))
+  print(var_rank_info(sitio_mim, eti_sitio[l]))
   #save table in csv
   #name_gr <- names_eti_sitio[l]
   #name_table_gr <- paste("csv-graphs/tlaco/gr/",name_gr,"_gr.csv",sep = "")
@@ -283,5 +259,4 @@ for (l in seq_along(eti_sitio)) {
   #plot_gr <- paste("images/tlaco/gr/",name_gr,"_gr.png",sep = "")
   #ggsave(plot_gr)
 }
-
 ```

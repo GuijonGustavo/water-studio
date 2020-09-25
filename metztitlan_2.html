@@ -374,7 +374,8 @@ library(RColorBrewer)
 library(funModeling)
 library(corrplot)
 library(mpmi)
-library(minerva)</code></pre>
+library(minerva)
+library(infotheo)</code></pre>
 <div id="sitio-metztitlán-2" class="section level1">
 <h1>Sitio: Metztitlán 2</h1>
 <p>Se tiene un marco de datos que contiene varias métricas relacionadas, y se calculó (con la teoría de la información): entropía, información mutua, ganancia de información y relación de ganancia.</p>
@@ -395,16 +396,9 @@ library(minerva)</code></pre>
 </div>
 <div id="matríz-de-información-mutua" class="section level1">
 <h1>Matríz de Información Mutua</h1>
-<pre class="r"><code>sitio_mim &lt;- read.csv(&quot;data/metztitlan_2_mim.csv&quot;)
-
-sitio_mim[is.na(sitio_mim)] &lt;- 0
-
-#calculo de MIC
-#res_mine=mine(sitio_mim)</code></pre>
-<pre class="r"><code>library(infotheo)
-
-#sitio_mim &lt;- read.csv(&quot;data/tlacotepec_mim.csv&quot;)
-# Discretizar cada variable
+<pre class="r"><code>#Datos
+sitio_mim &lt;- read.csv(&quot;data/metztitlan_2_mim.csv&quot;)</code></pre>
+<pre class="r"><code># Discretizar cada variable
 matriz=discretize(sitio_mim) 
 
 # Calcular la &quot;correlación&quot; basándonos en información mutua

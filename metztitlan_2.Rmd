@@ -20,7 +20,7 @@ library(funModeling)
 library(corrplot)
 library(mpmi)
 library(minerva)
-
+library(infotheo)
 ```
 
 
@@ -50,21 +50,11 @@ Los gráficos son en el siguiente orden:
 # Matríz de Información Mutua
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
+#Datos
 sitio_mim <- read.csv("data/metztitlan_2_mim.csv")
-
-sitio_mim[is.na(sitio_mim)] <- 0
-
-#calculo de MIC
-#res_mine=mine(sitio_mim)
-
 ```
 
 ```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE}
-
-
-library(infotheo)
-
-#sitio_mim <- read.csv("data/tlacotepec_mim.csv")
 # Discretizar cada variable
 matriz=discretize(sitio_mim) 
 
