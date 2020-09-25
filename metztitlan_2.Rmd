@@ -21,6 +21,8 @@ library(corrplot)
 library(mpmi)
 library(minerva)
 library(infotheo)
+library(DT)
+library(knitr)
 ```
 
 
@@ -144,7 +146,7 @@ names_eti_sitio = c(
  'Nitrógeno de Nitratos')
 ```
 ## Gráficas Información Mutua
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='asis'}
 for (i in seq_along(eti_sitio)) {
 
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[i]), aes(x = reorder(var, mi),y = mi, fill = var))
@@ -157,7 +159,7 @@ for (i in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #try(print(var_rank_info(sitio_normal, eti_sitio[i])))
+  print(kable(var_rank_info(sitio_mim, eti_sitio[i])))
   #save table in csv
   #name_mi <- names_eti_sitio[i]
   #name_table_mi <- paste("csv-graphs/metz2/mi/",name_mi,"_mi.csv",sep = "")
@@ -174,7 +176,7 @@ for (i in seq_along(eti_sitio)) {
 
 ## Gráficas Entropía
 
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='asis'}
 for (j in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[j]), aes(x = reorder(var, en),y = en, fill = var))
@@ -187,7 +189,7 @@ for (j in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #try(print(var_rank_info(sitio_normal, eti_sitio[j])))
+  print(kable(var_rank_info(sitio_mim, eti_sitio[j])))
   #save table in csv
   #name_en <- names_eti_sitio[j]
   #name_table_en <- paste("csv-graphs/metz2/en/",name_en,"_en.csv",sep = "")
@@ -201,7 +203,7 @@ for (j in seq_along(eti_sitio)) {
 ```
 
 ## Gráficas Ganancia de información
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='asis'}
 for (k in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[k]), aes(x = reorder(var, ig),y = ig, fill = var))
@@ -214,7 +216,7 @@ for (k in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #try(print(var_rank_info(sitio_normal, eti_sitio[k])))
+  print(kable(var_rank_info(sitio_mim, eti_sitio[k])))
   #save table in csv
   #name_ig <- names_eti_sitio[k]
   #name_table_ig <- paste("csv-graphs/metz2/ig/",name_ig,"_ig.csv",sep = "")
@@ -228,7 +230,7 @@ for (k in seq_along(eti_sitio)) {
 ```
 
 ## Gráficas Proporción de Ganancia (de información)
-```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='hide'}
+```{r eval=TRUE, warning=FALSE, message=FALSE, error=FALSE, echo=TRUE, results='asis'}
 for (l in seq_along(eti_sitio)) {
   
     print(myplot <- ggplot(var_rank_info(sitio_mim,  eti_sitio[l]), aes(x = reorder(var, gr),y = gr, fill = var))
@@ -241,7 +243,7 @@ for (l in seq_along(eti_sitio)) {
           + theme(plot.title = element_text(hjust = 0.5))
           + guides(fill = FALSE))
   
-  #try(print(var_rank_info(sitio_normal, eti_sitio[l])))
+  print(kable(var_rank_info(sitio_mim, eti_sitio[l])))
   #save table in csv
   #name_gr <- names_eti_sitio[l]
   #name_table_gr <- paste("csv-graphs/metz2/gr/",name_gr,"_gr.csv",sep = "")
