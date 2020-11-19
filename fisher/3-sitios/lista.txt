@@ -1,0 +1,19 @@
+Arsénico Total_TLACOTEPEC.csv
+Coliformes Fecales_TLACOTEPEC.csv
+Coliformes Totales_TLACOTEPEC.csv
+Color Verdadero_TLACOTEPEC.csv
+Cromo Total_TLACOTEPEC.csv
+Dureza Total_TLACOTEPEC.csv
+Escherichia coli_TLACOTEPEC.csv
+Mercurio Total_TLACOTEPEC.csv
+Níquel Total_TLACOTEPEC.csv
+Nitrógeno Amoniacal_TLACOTEPEC.csv
+Nitrógeno de Nitratos_TLACOTEPEC.csv
+Nitrógeno de Nitritos_TLACOTEPEC.csv
+Nitrógeno Total (Cálculo)_TLACOTEPEC.csv
+Oxígeno Disuelto_TLACOTEPEC.csv
+Potencial de Hidrógeno_TLACOTEPEC.csv
+Sólidos Suspendidos Totales_TLACOTEPEC.csv
+Sustancias Activas al Azul de Metileno_TLACOTEPEC.csv
+Temperatura agua_TLACOTEPEC.csv
+Turbiedad_TLACOTEPEC.csv
