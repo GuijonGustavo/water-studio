@@ -1,0 +1,11 @@
+Coliformes Fecales_LAGUNA DE METZTITLAN 1.csv
+Color Verdadero_LAGUNA DE METZTITLAN 1.csv
+Dureza Total_LAGUNA DE METZTITLAN 1.csv
+Escherichia coli_LAGUNA DE METZTITLAN 1.csv
+Mercurio Total_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno Amoniacal_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno de Nitratos_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno de Nitritos_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno Total (Cálculo)_LAGUNA DE METZTITLAN 1.csv
+Sólidos Suspendidos Totales_LAGUNA DE METZTITLAN 1.csv
+Turbiedad_LAGUNA DE METZTITLAN 1.csv

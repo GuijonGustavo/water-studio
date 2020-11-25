@@ -1,0 +1,40 @@
+Arsénico Total_TLACOTEPEC.csv
+Coliformes Fecales_LAGUNA DE METZTITLAN 1.csv
+Coliformes Fecales_LAGUNA DE METZTITLAN 2.csv
+Coliformes Fecales_TLACOTEPEC.csv
+Coliformes Totales_TLACOTEPEC.csv
+Color Verdadero_LAGUNA DE METZTITLAN 1.csv
+Color Verdadero_LAGUNA DE METZTITLAN 2.csv
+Color Verdadero_TLACOTEPEC.csv
+Cromo Total_TLACOTEPEC.csv
+Dureza Total_LAGUNA DE METZTITLAN 1.csv
+Dureza Total_LAGUNA DE METZTITLAN 2.csv
+Dureza Total_TLACOTEPEC.csv
+Escherichia coli_LAGUNA DE METZTITLAN 1.csv
+Escherichia coli_TLACOTEPEC.csv
+Mercurio Total_LAGUNA DE METZTITLAN 1.csv
+Mercurio Total_LAGUNA DE METZTITLAN 2.csv
+Mercurio Total_TLACOTEPEC.csv
+Níquel Total_TLACOTEPEC.csv
+Nitrógeno Amoniacal_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno Amoniacal_LAGUNA DE METZTITLAN 2.csv
+Nitrógeno Amoniacal_TLACOTEPEC.csv
+Nitrógeno de Nitratos_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno de Nitratos_LAGUNA DE METZTITLAN 2.csv
+Nitrógeno de Nitratos_TLACOTEPEC.csv
+Nitrógeno de Nitritos_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno de Nitritos_LAGUNA DE METZTITLAN 2.csv
+Nitrógeno de Nitritos_TLACOTEPEC.csv
+Nitrógeno Total (Cálculo)_LAGUNA DE METZTITLAN 1.csv
+Nitrógeno Total (Cálculo)_LAGUNA DE METZTITLAN 2.csv
+Nitrógeno Total (Cálculo)_TLACOTEPEC.csv
+Oxígeno Disuelto_TLACOTEPEC.csv
+Potencial de Hidrógeno_TLACOTEPEC.csv
+Sólidos Suspendidos Totales_LAGUNA DE METZTITLAN 1.csv
+Sólidos Suspendidos Totales_LAGUNA DE METZTITLAN 2.csv
+Sólidos Suspendidos Totales_TLACOTEPEC.csv
+Sustancias Activas al Azul de Metileno_TLACOTEPEC.csv
+Temperatura agua_TLACOTEPEC.csv
+Turbiedad_LAGUNA DE METZTITLAN 1.csv
+Turbiedad_LAGUNA DE METZTITLAN 2.csv
+Turbiedad_TLACOTEPEC.csv
